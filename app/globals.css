@@ -1,0 +1,170 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Design tokens — light is the default, .dark on <html> swaps them. */
+:root {
+  --bg: #f6f5f1;
+  --bg-raised: #ffffff;
+  --fg: #151a23;
+  --muted: #5a6270;
+  --line: #e2dfd7;
+  --accent: #127a6b;
+  --accent-soft: #dcefe9;
+  --ink: #0b1220;
+  --ink-fg: #eef0f2;
+  --ink-muted: #9aa3b2;
+  --ink-line: #1f2a3c;
+  --ink-accent: #4fd1bb;
+}
+
+.dark {
+  --bg: #0b1220;
+  --bg-raised: #111a2c;
+  --fg: #e9ecf1;
+  --muted: #9aa3b2;
+  --line: #1f2a3c;
+  --accent: #4fd1bb;
+  --accent-soft: #12332f;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-raised: var(--bg-raised);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-ink: var(--ink);
+  --color-ink-fg: var(--ink-fg);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-line: var(--ink-line);
+  --color-ink-accent: var(--ink-accent);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-display: var(--font-instrument-serif), ui-serif, Georgia, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Scroll reveal. Hidden state applies only when JS has marked the document,
+   so content is always visible without JavaScript. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.js [data-reveal][data-visible="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Long-form text in articles and case studies. */
+.prose-body p + p {
+  margin-top: 1rem;
+}
+
+.prose-article {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+.prose-article h2 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  line-height: 1.15;
+  margin: 2.5rem 0 1rem;
+}
+.prose-article h3 {
+  font-weight: 600;
+  font-size: 1.15rem;
+  margin: 2rem 0 0.75rem;
+}
+.prose-article p,
+.prose-article ul,
+.prose-article ol {
+  margin: 1rem 0;
+}
+.prose-article ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+}
+.prose-article ol {
+  list-style: decimal;
+  padding-left: 1.25rem;
+}
+.prose-article a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.prose-article code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--accent-soft);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}
+.prose-article blockquote {
+  border-left: 2px solid var(--accent);
+  padding-left: 1rem;
+  color: var(--muted);
+}
+
+/* Print stylesheet for /resume (also used to generate the PDF). */
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm 16mm;
+  }
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+    color: #111;
+  }
+}
