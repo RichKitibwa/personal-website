@@ -18,6 +18,7 @@ export const profile = {
   links: {
     linkedin: "https://www.linkedin.com/in/kitibwa-rich",
     github: "https://github.com/RichKitibwa",
+    devto: "https://dev.to/richkitibwa",
   },
   portrait: {
     src: "/images/portrait.jpg",

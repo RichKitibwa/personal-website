@@ -14,7 +14,7 @@ export const personJsonLd = {
   address: { "@type": "PostalAddress", addressLocality: "Kampala", addressCountry: "UG" },
   alumniOf: { "@type": "CollegeOrUniversity", name: "Makerere University" },
   worksFor: { "@type": "Organization", name: "MamaOpe Medicals", url: "https://www.mamaope.com/" },
-  sameAs: [profile.links.linkedin, profile.links.github],
+  sameAs: [profile.links.linkedin, profile.links.github, profile.links.devto],
   knowsAbout: [
     "Software engineering",
     "Applied artificial intelligence",
